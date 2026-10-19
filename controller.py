@@ -1,17 +1,13 @@
-from registration import (
-    ConsoleUserInput,
-    RegistrationValidator,
-    SimulatedExternalService,
-)
+from registration import ExternalService, RegistrationValidator, UserInput
 from registration_db import RegistrationDatabase
 
 
 class Controller:
     def __init__(
         self,
-        user_input: ConsoleUserInput,
+        user_input: UserInput,
         database: RegistrationDatabase,
-        external_service: SimulatedExternalService,
+        external_service: ExternalService,
         validator: RegistrationValidator | None = None,
     ) -> None:
         self.user_input = user_input

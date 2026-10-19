@@ -3,10 +3,10 @@ from unittest.mock import Mock, patch
 
 from controller import Controller
 from registration import (
-    ConsoleUserInput,
+    ExternalService,
     RegistrationResult,
     RegistrationValidator,
-    SimulatedExternalService,
+    UserInput,
 )
 from registration_db import RegistrationDatabase
 
@@ -31,8 +31,8 @@ class TestRegistrationValidator(unittest.TestCase):
 class TestRegistrationIntegration(unittest.TestCase):
     def setUp(self):
         self.database = RegistrationDatabase()
-        self.input = Mock(spec=ConsoleUserInput)
-        self.external = Mock(spec=SimulatedExternalService)
+        self.input = Mock(spec=UserInput)
+        self.external = Mock(spec=ExternalService)
         self.controller = Controller(self.input, self.database, self.external)
 
     def tearDown(self):

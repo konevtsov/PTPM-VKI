@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 
@@ -88,12 +89,24 @@ class RegistrationValidator:
         return RegistrationResult(True)
 
 
-class ConsoleUserInput:
+class UserInput(ABC):
+    @abstractmethod
+    def get_registration_data(self) -> tuple[str, str, str]:
+        ...
+
+
+class ConsoleUserInput(UserInput):
     def get_registration_data(self) -> tuple[str, str, str]:
         return (input("Логин: "), input("Пароль: "), input("Подтвердите пароль: "))
 
 
-class SimulatedExternalService:
+class ExternalService(ABC):
+    @abstractmethod
+    def send(self, message: str) -> None:
+        ...
+
+
+class SimulatedExternalService(ExternalService):
     def __init__(self) -> None:
         self.sent_messages: list[str] = []
 
